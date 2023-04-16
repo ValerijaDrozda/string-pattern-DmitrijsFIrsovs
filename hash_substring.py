@@ -1,20 +1,27 @@
 # python3
 
 def read_input():
-    input_in = input().rstrip()
+    try:
+        input_in = input().rstrip()
+    except EOFError:
+        raise ValueError('Invalid input: no more input available')
+        
     if input_in == 'I':      
         pattern = input().rstrip()
         text = input().rstrip()
         
     elif input_in == 'F':
         filename = input().rstrip()
-        with open (filename) as f:
-            pattern = f.readline().strip()
-            text = f.readline().strip()
+        try:
+            with open(filename) as f:
+                pattern = f.readline().strip()
+                text = f.readline().strip()
+        except FileNotFoundError:
+            raise ValueError(f'File not found: {filename}')
     else:
         raise ValueError('Invalid input type')
     
-    return pattern , text
+    return pattern, text
 
 def print_occurrences(output):
     # this function should control output, it doesn't need any return

@@ -1,14 +1,18 @@
 # python3
 
 def read_input():
-    input_in = input().strip()
-    if input_in == 'F':
-        with open ('input.txt', 'r') as f:
+    input_in = input().rstrip()
+    if input_in == 'I':      
+        pattern = input().rstrip()
+        text = input().rstrip()
+        
+    elif input_in == 'F':
+        filename = input().rstrip()
+        with open (filename) as f:
             pattern = f.readline().strip()
             text = f.readline().strip()
     else:
-        pattern = input().strip()
-        text = input().strip()
+        raise ValueError('Invalid input type')
     
     return pattern , text
 
@@ -17,37 +21,23 @@ def print_occurrences(output):
     print(' '.join(map(str, output)))
 
 def get_occurrences(pattern, text):
-    p = 1000000007
-    x =263
-    len_1 = len(pattern)
-    len_2 = len(text)
-    hash_pattern = poly_hash(pattern, p, x)
-    base = pow(x, len_1 - 1, p)
-    hash_values = [None] * (len_2 - len_1 +1)
-    hash_values[-1] = poly_hash(text[len_2 - len_1:], p , x)
+    pattern_len = len(pattern)
+    text_len = len(text)
+    pattern_hash = hash(pattern)
+    text_hash = hash(text[:pattern_len])
+    occurrences = []
     
-    for i in range (len_2 - len_1 - 1, -1, -1):
-        hash_values[i] = (x * hash_values[i+1] + ord(text[i]) -ord(text[i+len_1] * base)) % p
-    pos = []
-    
-    for i in range (len_2 - len_1 +1):
-        if hash_pattern != hash_values[i]:
-            continue
-        if text[i:i+len_1] == pattern:
-            pos.append(i)
-    return pos
+    for i in range(text_len - pattern_len + 1):
+        if pattern_hash == text_hash:
+            if pattern == text[i:i+pattern_len]:
+                occurrences.append(i)
+       
+        if i < text_len - pattern_len:
+            text_hash = hash(text[i+1:i+1+pattern_len])
 
-def poly_hash(s, p, x):
-    hash_value =0
-    for i in range(len(s)-1, -1, -1):
-        hash_value = (hash_value * x + ord(s[i])) % p
-    return hash_value
-
+    return occurrences 
     
     
-    
-    
-
 
 if __name__ == '__main__':
     print_occurrences(get_occurrences(*read_input()))

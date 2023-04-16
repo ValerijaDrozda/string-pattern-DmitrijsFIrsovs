@@ -1,7 +1,7 @@
 # Python 3
 
 def read_input():
-   input_type = input().rstrip()
+    input_type = input().rstrip()
     if input_type == 'I':
         pattern = input().rstrip()
         text = input().rstrip()
@@ -16,6 +16,7 @@ def read_input():
         pattern, text = read_input()
 
     return pattern, text
+
 
 def print_occurrences(output):
     print(' '.join(map(str, output)))

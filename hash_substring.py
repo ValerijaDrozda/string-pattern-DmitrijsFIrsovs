@@ -19,7 +19,7 @@ def print_occurrences(output):
 def get_occurrences(pattern, text):
     len_1 = len(pattern)
     len_2 = len(text)
-    hash_1 = hash(patern)
+    hash_1 = hash(pattern)
     hash_2 = hash(text[:len_1])
     s = 1
     for _ in range(len_1 - 1):

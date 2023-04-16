@@ -20,9 +20,9 @@ def get_occurrences(pattern, text):
     p = 1000000007
     x = 263
 
-    for  i in range(len(pattern):
-        g = sum([ord(pattern[i]) * x**i for i in range(len(pattern))]) % p
-        h = sum([ord(text[i]) * x**i for i in range(len(pattern))]) % p
+    
+    g = sum([ord(pattern[i]) * x**i for i in range(len(pattern))]) % p
+    h = sum([ord(text[i]) * x**i for i in range(len(pattern))]) % p
                    
     pos = []                
    
@@ -35,6 +35,7 @@ def get_occurrences(pattern, text):
                 hash += ord(text[i+j+1]) * x**j
             h =  (h - ord(text[i] * x**(len(pattern)-1) )  * x + hash    
             h = h % p
+                  
     return pos
 
 

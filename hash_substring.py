@@ -25,7 +25,7 @@ def get_occurrences(pattern, text):
     b_x = 1000000007
     pos = []
     
-    for for i in range(e):
+    for  i in range(e):
         g = (g * a_x + ord(pattern[i])) % b_x
         h = (h * a_x + ord(text[i])) % b_x
     

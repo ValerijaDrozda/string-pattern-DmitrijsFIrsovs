@@ -35,7 +35,14 @@ def get_occurrences(pattern, text):
             continue
         if text[i:i+len_1] == pattern:
             pos.append(i)
-    return pos        
+    return pos
+
+def poly_hash(s, p, x):
+    hash_value =0
+    for i in range(len(s)-1, -1, -1):
+        hash_value = (hash_value * x + ord(s[i])) % p
+    return hash_value
+
     
     
     

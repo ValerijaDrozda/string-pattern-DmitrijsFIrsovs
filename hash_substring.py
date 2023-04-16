@@ -1,18 +1,14 @@
 # python3
 
 def read_input():
-    a = input().rstrip().upper()
-   
-    
-    if a == "I":
-        pattern = input().rstrip()
-        text = input().rstrip()
-        
+    a = input().strip().upper()
+    pattern = input().strip()
+    text = input().strip()
+     
+    if a == 'F':
+        with open(text, "r") as f:
             
-    elif a == "F":
-        with open("input.txt", "r") as file:
-            pattern = file.readline().rstrip()
-            text = file.readline().rstrip()
+            text = f.read().strip()
         
     return pattern , text
 
@@ -21,35 +17,24 @@ def print_occurrences(output):
     print(' '.join(map(str, output)))
 
 def get_occurrences(pattern, text):
-    p = 10**9 +7
-    x = 26
-    g = 0
-    h =0
-    
-   
-    
+    p = 1000000007
+    x = 263
+
     for  i in range(len(pattern):
-        g = (g * x + ord(pattern[i])) % p
-        h = (h * x + ord(text[i])) % p
-                    
-    x_pow = pow(x, len(pattern), p) 
-                    
+        g = sum([ord(pattern[i]) * x**i for i in range(len(pattern))]) % p
+        h = sum([ord(text[i]) * x**i for i in range(len(pattern))]) % p
+                   
     pos = []                
-        
-        
-    if g == h:
-        if pattern == text[:len(pattern)]:      
-            pos.append(0)
-    
-    for i in range(1, len(text), len(pattern) + 1):
-        h = ((h - ord(text[i - 1]) * x_pow) * x + ord(text[i+len(pattern) - 1])) % p
-        
-        if g == h:
-            if pattern == text[i:i + len(pattern)]:
-                    
-                pos.append(i)
-            
-    
+   
+    for i in range( len(text), len(pattern) + 1):
+        if  g == h and text[i:i + len(pattern)] == pattern:
+             pos.append(i)
+        if i < len(text) - len(pattern):
+            hash = 0
+            for j in range(len(pattern)):
+                hash += ord(text[i+j+1]) * x**j
+            h =  (h - ord(text[i] * x**(len(pattern)-1) )  * x + hash    
+            h = h % p
     return pos
 
 

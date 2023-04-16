@@ -2,20 +2,26 @@
 
 def read_input():
     
-    input_type = input().rstrip()
-    if input_type == 'I':
-        pattern = input().rstrip()
-        text = input().rstrip()
-    elif input_type == 'F':       
-        filename = input().rstrip()
-        with open(filename) as f:
-            pattern = f.readline().rstrip()
-            text = f.readline().rstrip()
-    else:
-        raise ValueError('Invalid input type')
+   try:     
+        input_type = input().rstrip()
+        if input_type == 'I':           
+            pattern = input().rstrip()
+            text = input().rstrip()
+        elif input_type == 'F':       
+            filename = input().rstrip()
+            with open(filename) as f:
+                pattern = f.readline().rstrip()
+                text = f.readline().rstrip()
+        else:
+            raise ValueError('Invalid input type')
 
-    return pattern, text
+       
+        return pattern, text
 
+    except EOFError:
+       
+        raise ValueError('Not enough input provided')
+        
 def print_occurrences(output):
     
     print(' '.join(map(str, output)))

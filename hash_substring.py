@@ -1,17 +1,17 @@
 # python3
+import sys
+
 
 def read_input():
-    a = input().strip().lower()
+    if len(sys.argv) > 1 and sys.argv[1] == 'F':
+        with open(sys.argv[2], "r") as f:
+            pattern = f.readline().strip()
+            text = f.readline().strip()
     
-    if a == 'i':
+    else:
         pattern = input().strip()
         text = input().strip()
        
-    elif a == 'f':
-        with open('input.txt', "r") as f:
-            pattern = f.readline().strip()
-            text = f.readline().strip()
-        
     return pattern , text
 
 def print_occurrences(output):

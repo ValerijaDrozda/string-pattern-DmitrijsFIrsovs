@@ -1,22 +1,24 @@
 # Python 3
 
 def read_input():
-    input_type = input().rstrip()
-    if input_type == 'I':
-        pattern = input().rstrip()
-        text = input().rstrip()
-    elif input_type == 'F':
-        filename = input().rstrip()
-        with open(filename) as f:
-            pattern = f.readline().rstrip()
-            text = f.readline().rstrip()
-    else:
-        while input_type not in ['I', 'F']:
-            input_type = input('Invalid input type, please enter I or F: ').rstrip()
-        pattern, text = read_input()
-
+    try:
+        input_type = input().rstrip()
+        if input_type == 'I':
+            pattern = input().rstrip()
+            text = input().rstrip()
+        elif input_type == 'F':
+            filename = input().rstrip()
+            with open(filename) as f:
+                pattern = f.readline().rstrip()
+                text = f.readline().rstrip()
+        else:
+            raise ValueError('Invalid input type')
+    except EOFError:
+        print("Error: No input provided.")
+        pattern = ''
+        text = ''
+        
     return pattern, text
-
 
 def print_occurrences(output):
     print(' '.join(map(str, output)))

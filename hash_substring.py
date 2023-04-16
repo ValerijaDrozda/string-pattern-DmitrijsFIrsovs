@@ -1,4 +1,4 @@
-# Python 3
+import os
 
 def read_input():
     try:
@@ -20,10 +20,6 @@ def read_input():
         
     return pattern, text
 
-def print_occurrences(output):
-    print(' '.join(map(str, output)))
-
-
 def get_occurrences(pattern, text):
     pattern_len = len(pattern)
     text_len = len(text)
@@ -41,7 +37,13 @@ def get_occurrences(pattern, text):
 
     return pos
 
-
 if __name__ == '__main__':
-    print_occurrences(get_occurrences(*read_input()))
+    pattern, text = read_input()
+    pos = get_occurrences(pattern, text)
+    output_str = ' '.join(map(str, pos))
+    print(output_str)
+    
+    # Write output to environment file
+    with open(os.environ['GITHUB_ENV'], 'a') as f:
+        f.write(f'OUTPUT_STRING={output_str}\n')
    

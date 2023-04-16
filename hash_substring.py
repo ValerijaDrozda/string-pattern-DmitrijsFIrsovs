@@ -4,10 +4,10 @@ def read_input():
     a = input().strip().lower()
     
     if a == 'i':
-    pattern = input().strip()
-    text = input().strip()
-     
-    else a == 'f':
+        pattern = input().strip()
+        text = input().strip()
+       
+    elif a == 'f':
         with open('input.txt', "r") as f:
             pattern = f.readline().strip()
             text = f.readline().strip()

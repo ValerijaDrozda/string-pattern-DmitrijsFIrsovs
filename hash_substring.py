@@ -11,36 +11,35 @@ def read_input():
             pattern = f.readline().rstrip()
             text = f.readline().rstrip()
     else:
-        raise ValueError('Invalid input type')
-       
+        while input_type not in ['I', 'F']:
+            input_type = input('Invalid input type, please enter I or F: ').rstrip()
+        pattern, text = read_input()
+
     return pattern, text
-    
-  
+
+
 def print_occurrences(output):
-    
     print(' '.join(map(str, output)))
 
-def get_occurrences(pattern, text):
-    
 
-    
+def get_occurrences(pattern, text):
     pattern_len = len(pattern)
     text_len = len(text)
     pattern_hash = hash(pattern)
     text_hash = hash(text[:pattern_len])
     pos = []
 
-    
-    for i in range(text_len - pattern_len + 1):   
-        if pattern_hash == text_hash:   
-            if pattern == text[i:i+pattern_len]:
+    for i in range(text_len - pattern_len + 1):
+        if pattern_hash == text_hash:
+            if pattern == text[i:i + pattern_len]:
                 pos.append(i)
 
-        
         if i < text_len - pattern_len:
-            text_hash = hash(text[i+1:i+1+pattern_len])
+            text_hash = hash(text[i + 1:i + 1 + pattern_len])
 
     return pos
 
+
 if __name__ == '__main__':
     print_occurrences(get_occurrences(*read_input()))
+   

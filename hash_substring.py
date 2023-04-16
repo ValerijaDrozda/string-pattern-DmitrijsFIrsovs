@@ -1,14 +1,16 @@
 # python3
 
 def read_input():
-    a = input().rstrip()
-    if a == 'f':
-        with open(input().rstrip(), 'r') as f:
-            pattern = f.readline().rstrip()
-            text = f.readline().rstrip() 
+    a = input().rstrip().lower()
+    aa = input().rstrip().lower()
+    
+    if aa == 'f':
+        with open('input,txt', 'r') as f:
+            pattern = f.readline().rstrip().lower()
+            text = f.readline().rstrip().lower() 
     else:
-        pattern = input().rstrip()
-        text = input().rstrip()
+        pattern = input().rstrip().lower() 
+        text = input().rstrip().lower() 
     
     return pattern , text
 
@@ -17,25 +19,28 @@ def print_occurrences(output):
     print(' '.join(map(str, output)))
 
 def get_occurrences(pattern, text):
-    e = len(pattern)
-    f = len(text)
+    e = 31
+    f = 10**9 +9
     g = 0
     h = 0
-    a_x = 263
-    b_x = 1000000007
+    x = 1
+    
     pos = []
     
     for  i in range(e):
-        g = (g * a_x + ord(pattern[i])) % b_x
-        h = (h * a_x + ord(text[i])) % b_x
+        g = (g + (ord(pattern[i]) - ord('a') + 1) * x) % f
+        h = (h + (ord(text[i]) - ord('a') + 1) * x) % f
+        f = (x * e) % f
+        
+    if g == h and pattern == text[:len(pattern)]:
+        pos.append(0)
     
-    for i in range(f - e +1):
-        if g == h and pattern == text[i:i+e]:
-            pos.append(i)
-        if i < f - e:
+    for i in range(len(pattern), len(text)):
+        h = (h - (ord(text[i - len(pattern)]) - ord('a') + 1) * x) % f
+        h = (h * e + (ord(text[i]) - ord('a') + 1)) % f
+        if g == h and pattern == text[i - len(pattern) + 1:i + 1]:
+            pos.append(i - len(pattern) +1)
             
-            f = (f - ord(text[i]) * pow(a_x - 1 , b_x)) % b_x
-            f = (f  * a_x + ord(text[i + e] )) % b_x
     
     return pos
 

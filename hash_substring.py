@@ -2,18 +2,17 @@
 
 def read_input():
     
-
     input_type = input().rstrip()
-    if input_type == 'I':
+    if input_type == 'i':
         pattern = input().rstrip()
         text = input().rstrip()
-    elif input_type == 'F':       
+    elif input_type == 'f':       
         filename = input().rstrip()
-        with open(filename) as f:
+        with open(filename, 'r') as f:
             pattern = f.readline().rstrip()
             text = f.readline().rstrip()
     else:
-        raise ValueError('Invalid input type')
+        raise ValueError("Invalid input type")
 
     return pattern, text
 

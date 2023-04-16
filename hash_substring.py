@@ -33,7 +33,7 @@ def get_occurrences(pattern, text):
             hash = 0
             for j in range(len(pattern)):
                 hash += ord(text[i+j+1]) * x**j
-            h =  (h - ord(text[i] * x**(len(pattern)-1) )  * x + hash    
+            h =  (h - ord(text[i]) * x**(len(pattern)-1))  * x + hash    
             h = h % p
                   
     return pos

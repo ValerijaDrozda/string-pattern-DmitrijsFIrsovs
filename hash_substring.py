@@ -1,16 +1,16 @@
 # python3
 
 def read_input():
-    a = input().rstrip().lower()
-    aa = input().rstrip().lower()
+    a = input().rstrip()
+   
     
-    if aa == 'f':
-        with open('input,txt', 'r') as f:
-            pattern = f.readline().rstrip().lower()
-            text = f.readline().rstrip().lower() 
+    if a == 'f':
+        with open(input().rstrip(), 'r') as f:
+            pattern = f.readline().rstrip()
+            text = f.readline().rstrip()
     else:
-        pattern = input().rstrip().lower() 
-        text = input().rstrip().lower() 
+        pattern = input().rstrip()
+        text = input().rstrip()
     
     return pattern , text
 

@@ -1,14 +1,16 @@
 # python3
 
 def read_input():
-    a = input().strip().upper()
+    a = input().strip().lower()
+    
+    if a == 'i':
     pattern = input().strip()
     text = input().strip()
      
-    if a == 'F':
-        with open(text, "r") as f:
-            
-            text = f.read().strip()
+    elif a == 'f':
+        with open('input.txt', "r") as f:
+            pattern = f.readline().strip()
+            text = f.readline().strip()
         
     return pattern , text
 

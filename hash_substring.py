@@ -4,30 +4,30 @@ def read_input():
     a = input().rstrip()
     if a == 'f':
         with open(input().rstrip(), 'r') as f:
-            b = f.readline().rstrip()
-            c = f.readline().rstrip() 
+            pattern = f.readline().rstrip()
+            text = f.readline().rstrip() 
     else:
-        b = input().rstrip()
-        c = input().rstrip()
+        pattern = input().rstrip()
+        text = input().rstrip()
     
-    return b,c
+    return pattern , text
 
 def print_occurrences(output):
   
     print(' '.join(map(str, output)))
 
 def get_occurrences(pattern, text):
-    e = len(b)
-    f = len(c)
-    g= hash(b)
-    h = hash(c[:e])
+    e = len(pattern)
+    f = len(text)
+    g= hash(pattern)
+    h = hash(text[:e])
     pos = []
     
     for i in range(f - e + 1):
-        if g == h and b == c[i:i+e]:
+        if g == h and pattern == text[i:i+e]:
             pos.append(i)
         if i< f - e:
-            f = hash(b[i+1:i+1+e])
+            f = hash(pattern[i+1:i+1+e])
             
     
     return pos

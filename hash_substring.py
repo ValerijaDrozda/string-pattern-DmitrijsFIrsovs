@@ -17,23 +17,27 @@ def print_occurrences(output):
     print(' '.join(map(str, output)))
 
 def get_occurrences(pattern, text):
+    p = 1000000007
+    x =263
     len_1 = len(pattern)
     len_2 = len(text)
-    hash_1 = hash(pattern)
-    hash_2 = hash(text[:len_1])
-    s = 1
-    for _ in range(len_1 - 1):
-        s = (len_1 * base) % prime
-        
+    hash_pattern = poly_hash(pattern, p, x)
+    base = pow(x, len_1 - 1, p)
+    hash_values = [None] * (len_2 - len_1 +1)
+    hash_values[-1] = poly_hash(text[len_2 - len_1:], p , x)
+    
+    for i in range (len_2 - len_1 - 1, -1, -1):
+        hash_values[i] = (x * hash_values[i+1] + ord(text[i]) -ord(text[i+len_1] * base)) % p
     pos = []
-    for i in range(len_2 - len_1 + 1):
-        if hash_1 == hash_2:
-            if pattern == text[i:i + len_1]:
-                pos.append(i)
-        if i < len_2 - len_1:
-            hash_2 = ((hash_2 - ord(text[i]) * s) * base + ord(text[i + len_1])) % prime
-            hash_2 = (hash_2 + prime) % prime
-    return pos    
+    
+    for i in range (len_2 - len_1 +1):
+        if hash_pattern != hash_values[i]:
+            continue
+        if text[i:i+len_1] == pattern:
+            pos.append(i)
+    return pos        
+    
+    
     
     
 

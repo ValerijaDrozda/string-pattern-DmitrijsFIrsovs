@@ -18,7 +18,7 @@ def read_input():
     
 
 def print_occurrences(output):
-    # this function should control output, it doesn't need any return
+
     print(' '.join(map(str, output)))
 
 def get_occurrences(pattern, text):
